@@ -64,7 +64,10 @@ function Main() {
       p={4}
       sx={{
         '-webkit-app-region': 'drag', // Make the background draggable
-        background: 'linear-gradient(135deg, #a5dff9, #c3f7f3, #e6fffb)',
+        background: '#fff',
+        backgroundImage: 'url(https://widget.zyka.ai/img/bg.svg)',
+        boxShadow: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
+        border: '1px solid #ccc',
       }}
     >
       {/* Title heading no longer needs drag property since parent is draggable */}

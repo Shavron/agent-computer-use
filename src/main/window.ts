@@ -86,9 +86,9 @@ export async function createMainWindow(
   mainWindow = new BrowserWindow({
     show: false,
     width: 450,
-    height: height,
-    x: width - 450,
-    y: 0,
+    height: height - 32,
+    x: width - 450 - 16,
+    y: 16,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
