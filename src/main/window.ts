@@ -85,15 +85,17 @@ export async function createMainWindow(
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 350,
-    height: 600,
-    x: width - 350,
+    width: 450,
+    height: height,
+    x: width - 450,
     y: 0,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
     icon: getAssetPath('icon.png'),
     webPreferences: {
+      // nodeIntegration: true, // added by abhilash
+      // contextIsolation: true, // added by abhilash
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),

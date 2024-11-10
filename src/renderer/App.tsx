@@ -40,11 +40,20 @@ function Main() {
     dispatch({ type: 'RUN_AGENT', payload: null });
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (e.key === 'Enter' && !e.metaKey && !e.shiftKey) {
       e.preventDefault();
       startRun();
     }
+    updateTextAreaHeight(e);
+  };
+
+  const updateTextAreaHeight = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void => {
+    const textarea = e.target as HTMLTextAreaElement; // Type assertion for target
+    textarea.style.height = 'auto'; // Reset the height
+    textarea.style.height = `${textarea.scrollHeight}px`; // Template literal for string concatenation
   };
 
   return (
@@ -55,13 +64,12 @@ function Main() {
       p={4}
       sx={{
         '-webkit-app-region': 'drag', // Make the background draggable
+        background: 'linear-gradient(135deg, #a5dff9, #c3f7f3, #e6fffb)',
       }}
     >
       {/* Title heading no longer needs drag property since parent is draggable */}
       <Box position="absolute" top={2} left={6}>
-        <Heading fontFamily="Garamond, serif" fontWeight="hairline">
-          Agent.exe
-        </Heading>
+        <Heading fontFamily="serif">Zyka AI</Heading>
       </Box>
 
       {/* Window controls and GitHub button moved together */}
@@ -74,11 +82,11 @@ function Main() {
           '-webkit-app-region': 'no-drag',
         }}
       >
-        <Link href="https://github.com/corbt/agent.exe" isExternal>
-          <Button variant="ghost" size="sm" aria-label="GitHub" minW={8} p={0}>
-            <FaGithub />
-          </Button>
-        </Link>
+        {/* <Link href="https://github.com/corbt/agent.exe" isExternal>
+        <Button variant="ghost" size="sm" aria-label="GitHub" minW={8} p={0}>
+          <FaGithub />
+        </Button>
+      </Link> */}
         <Button
           size="sm"
           variant="ghost"
@@ -116,10 +124,10 @@ function Main() {
           as="textarea"
           placeholder="What can I do for you today?"
           width="100%"
-          height="auto"
-          minHeight="48px"
-          p={4}
-          borderRadius="16px"
+          // height="auto"
+          height="64px"
+          p={2}
+          borderRadius="8px"
           border="1px solid"
           borderColor="rgba(112, 107, 87, 0.5)"
           verticalAlign="top"
