@@ -72,7 +72,7 @@ function Main() {
     >
       {/* Title heading no longer needs drag property since parent is draggable */}
       <Box position="absolute" top={2} left={6}>
-        <Heading fontFamily="serif">Zyka AI</Heading>
+        <Heading fontFamily="serif">Zydo AI</Heading>
       </Box>
 
       {/* Window controls and GitHub button moved together */}
