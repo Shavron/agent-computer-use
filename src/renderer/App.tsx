@@ -160,7 +160,7 @@ function Main() {
         />
         <HStack justify="space-between" align="center" w="100%">
           <HStack spacing={2}>
-            <Switch
+            {/* <Switch
               isChecked={fullyAuto}
               onChange={(e) => {
                 toast({
@@ -172,7 +172,7 @@ function Main() {
                 });
               }}
             />
-            <Box>Full Auto</Box>
+            <Box>Full Auto</Box> */}
           </HStack>
           <HStack>
             {running && <Spinner size="sm" color="gray.500" mr={2} />}
@@ -216,7 +216,7 @@ function Main() {
               onClick={running ? () => dispatch('STOP_RUN') : startRun}
               isDisabled={!running && localInstructions?.trim() === ''}
             >
-              {running ? <FaStop /> : "Let's Go"}
+              {running ? <FaStop /> : "Let's Start"}
             </Button>
           </HStack>
         </HStack>

@@ -133,7 +133,7 @@ const promptForAction = async (
         },
       },
     ],
-    system: `The user will ask you to perform a task and you should use their computer to do so. After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one. Note that you have to click into the browser address bar before typing a URL. You should always call a tool! Always return a tool call. Remember call the finish_run tool when you have achieved the goal of the task. Do not explain you have finished the task, just call the tool. Use keyboard shortcuts to navigate whenever possible.`,
+    system: `The user will ask you to perform a task and you should use their computer to do so. After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one. Note that you have to click into the browser(google chrome) address bar before typing a URL. You should always call a tool! Always return a tool call. Remember call the finish_run tool when you have achieved the goal of the task. Do not explain you have finished the task, just call the tool. Use keyboard shortcuts to navigate whenever possible.`,
     // tool_choice: { type: 'any' },
     messages: historyWithoutImages,
     betas: ['computer-use-2024-10-22'],
@@ -231,6 +231,7 @@ export const runAgent = async (
       );
       console.log('REASONING', reasoning);
       console.log('ACTION', action);
+      // console.log('STATE', getState());
 
       if (action.type === 'error') {
         setState({
@@ -246,6 +247,7 @@ export const runAgent = async (
         });
         break;
       }
+      console.log('running', getState().running);
       if (!getState().running) {
         break;
       }
