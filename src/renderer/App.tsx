@@ -11,13 +11,22 @@ import {
   extendTheme,
   Spinner,
   useToast,
+  Image,
 } from '@chakra-ui/react';
-import { FaGithub, FaStop, FaTrash } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaStop,
+  FaTrash,
+  FaStart,
+  FaExternalLinkAlt,
+} from 'react-icons/fa';
 import { HiMinus, HiX } from 'react-icons/hi';
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import { useDispatch } from 'zutron';
 import { useStore } from './hooks/useStore';
 import { RunHistory } from './RunHistory';
+import bg from '../../assets/bg.svg';
+import icon from '../../assets/icon.png';
 
 function Main() {
   const dispatch = useDispatch(window.zutron);
@@ -65,14 +74,22 @@ function Main() {
       sx={{
         '-webkit-app-region': 'drag', // Make the background draggable
         background: '#fff',
-        backgroundImage: 'url(https://widget.zyka.ai/img/bg.svg)',
+        backgroundImage: `url(${bg})`,
         boxShadow: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
         border: '1px solid #ccc',
+        borderRadius: '16px',
+        overflow: 'hidden',
       }}
     >
       {/* Title heading no longer needs drag property since parent is draggable */}
-      <Box position="absolute" top={2} left={6}>
-        <Heading fontFamily="serif">Zydo AI</Heading>
+      <Box position="absolute" top={3} left={4}>
+        <HStack spacing={0}>
+          <Image src={icon} alt="Icon" boxSize="28px" />
+          {/* Set boxSize as per your desired icon size */}
+          <Heading as="h1" sx={{ fontSize: '24px' }}>
+            ydo
+          </Heading>
+        </HStack>
       </Box>
 
       {/* Window controls and GitHub button moved together */}
@@ -85,11 +102,12 @@ function Main() {
           '-webkit-app-region': 'no-drag',
         }}
       >
-        {/* <Link href="https://github.com/corbt/agent.exe" isExternal>
-        <Button variant="ghost" size="sm" aria-label="GitHub" minW={8} p={0}>
-          <FaGithub />
-        </Button>
-      </Link> */}
+        <Link href="https://zydo.ai" isExternal>
+          <Button variant="ghost" size="sm" aria-label="GitHub" minW={8} p={0}>
+            {/* <FaGithub /> */}
+            <FaExternalLinkAlt />
+          </Button>
+        </Link>
         <Button
           size="sm"
           variant="ghost"
@@ -115,7 +133,7 @@ function Main() {
         align="center"
         h="100%"
         w="100%"
-        pt={16}
+        pt={12}
         sx={{
           '& > *': {
             // Make all direct children non-draggable

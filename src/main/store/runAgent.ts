@@ -12,12 +12,12 @@ import { hideWindowBlock, showWindow } from '../window';
 
 const MAX_STEPS = 50;
 
-function getScreenDimensions(): { width: number; height: number } {
+const getScreenDimensions = (): { width: number; height: number } => {
   const primaryDisplay = screen.getPrimaryDisplay();
   return primaryDisplay.size;
-}
+};
 
-function getAiScaledScreenDimensions(): { width: number; height: number } {
+const getAiScaledScreenDimensions = (): { width: number; height: number } => {
   const { width, height } = getScreenDimensions();
   const aspectRatio = width / height;
 
@@ -35,7 +35,7 @@ function getAiScaledScreenDimensions(): { width: number; height: number } {
   }
 
   return { width: scaledWidth, height: scaledHeight };
-}
+};
 
 const getScreenshot = async (): Promise<string> => {
   const primaryDisplay = screen.getPrimaryDisplay();
@@ -143,6 +143,7 @@ const promptForAction = async (
 };
 
 export const performAction = async (action: NextAction) => {
+  console.log(action);
   switch (action.type) {
     case 'mouse_move':
       const { x, y } = mapFromAiSpace(action.x, action.y);
@@ -180,6 +181,8 @@ export const performAction = async (action: NextAction) => {
     case 'key':
       const keyMap = {
         Return: Key.Enter,
+        Page_Down: Key.PageDown,
+        Page_Up: Key.PageUp,
       };
       const keys = action.text.split('+').map((key) => {
         const mappedKey = keyMap[key as keyof typeof keyMap];
@@ -249,13 +252,16 @@ export const runAgent = async (
       }
       console.log('running', getState().running);
       if (!getState().running) {
+        console.log('break', getState());
         break;
       }
 
-      hideWindowBlock(() => performAction(action));
+      await hideWindowBlock(() => performAction(action));
 
+      // eslint-disable-next-line no-promise-executor-return
       await new Promise((resolve) => setTimeout(resolve, 500));
       if (!getState().running) {
+        console.log('break2', getState());
         break;
       }
 
@@ -289,6 +295,7 @@ export const runAgent = async (
         ],
       });
     } catch (error: unknown) {
+      console.log('Catch Block [runAgent]', error.message);
       setState({
         ...getState(),
         error:

@@ -1,0 +1,6 @@
+ html,
+      body {
+        border-radius: 16px;
+        overflow: hidden;
+        background: transparent !important;
+      }
